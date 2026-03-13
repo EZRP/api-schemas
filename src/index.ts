@@ -1,3 +1,5 @@
-export function libFunction(): string {
-  return "Hello from the library!";
-}
+import { scalars } from "./scalars/index.js";
+
+export const schemas = {
+  ...scalars,
+};

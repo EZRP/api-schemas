@@ -1,5 +1,5 @@
+import assert from "node:assert/strict";
 import { after, suite, test } from "node:test";
-import { assert } from "@infra-blocks/test";
 
 function setUp() {
   console.log("setting up");
