@@ -1,8 +1,6 @@
-import { suite, test } from "node:test";
-import { assert } from "@infra-blocks/test";
+import { suite } from "node:test";
+import { scalarsTests } from "./scalars/index.js";
 
 suite("suite", () => {
-  test("dummy", () => {
-    assert(true);
-  });
+  scalarsTests();
 });
