@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { suite, test } from "node:test";
 import { expectTypeOf } from "expect-type";
 import { schemas } from "../../../src/index.js";
-import type { EnvironmentId } from "../../../src/scalars/environment-id.js";
+import type { EnvironmentId } from "../../../src/scalars/environmentId.js";
 import type { Uuid } from "../../../src/scalars/uuid.js";
 import { type BrandOf, expectParseFails, expectParseSucceeds } from "../lib.js";
 
