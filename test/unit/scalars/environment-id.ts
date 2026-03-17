@@ -20,7 +20,7 @@ export function environmentIdTests() {
       });
     });
 
-    suite("parser", () => {
+    suite("schema", () => {
       const expectFails = expectParseFails(schemas.environmentId());
       const expectSucceeds = expectParseSucceeds(schemas.environmentId());
 

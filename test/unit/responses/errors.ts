@@ -13,23 +13,23 @@ export function errorsTests() {
       });
     });
 
-    suite("parser", () => {
+    suite("schema", () => {
       const expectFails = expectParseFails(schemas.responses.errors());
       const expectSucceeds = expectParseSucceeds(schemas.responses.errors());
 
-      test("should throw for undefined", () => {
+      test("should fail for undefined", () => {
         expectFails(undefined);
       });
 
-      test("should throw for number", () => {
+      test("should fail for number", () => {
         expectFails(42);
       });
 
-      test("should throw for empty string", () => {
+      test("should fail for empty string", () => {
         expectFails("");
       });
 
-      test("should throw for empty object", () => {
+      test("should fail for empty object", () => {
         expectFails({});
       });
 
