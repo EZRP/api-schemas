@@ -1,6 +1,6 @@
 {
   "name": "@ezrp/api-schemas",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "This repository is a template to generate repositories meant to hold the source code of NPM packages written in TypeScript.",
   "keywords": [
     "schemas",
