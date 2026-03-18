@@ -1,6 +1,6 @@
 import { suite, test } from "node:test";
 import { expectTypeOf } from "expect-type";
-import { type ErrorsResponse, schemas } from "../../../src/index.js";
+import { apiSchemas, type ErrorsResponse } from "../../../src/index.js";
 import { type BrandOf, expectParseFails, expectParseSucceeds } from "../lib.js";
 
 export function errorsTests() {
@@ -14,8 +14,8 @@ export function errorsTests() {
     });
 
     suite("schema", () => {
-      const expectFails = expectParseFails(schemas.responses.errors());
-      const expectSucceeds = expectParseSucceeds(schemas.responses.errors());
+      const expectFails = expectParseFails(apiSchemas.responses.errors());
+      const expectSucceeds = expectParseSucceeds(apiSchemas.responses.errors());
 
       test("should fail for undefined", () => {
         expectFails(undefined);
