@@ -1,6 +1,6 @@
 import { suite, test } from "node:test";
 import { expectTypeOf } from "expect-type";
-import { schemas } from "../../../src/index.js";
+import { apiSchemas } from "../../../src/index.js";
 import type { PatchEnvironmentCompany } from "../../../src/requests/patch-environment-company.js";
 import { type BrandOf, expectParseSucceeds } from "../lib.js";
 
@@ -16,7 +16,7 @@ export function patchEnvironmentCompanyTests() {
 
     suite("schema", () => {
       const expectSucceeds = expectParseSucceeds(
-        schemas.requests.patchEnvironmentCompany(),
+        apiSchemas.requests.patchEnvironmentCompany(),
       );
 
       test("should succeed with valid standard string", () => {

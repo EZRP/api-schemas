@@ -6,7 +6,7 @@ export type * from "./requests/index.js";
 export type * from "./responses/index.js";
 export type * from "./scalars/index.js";
 
-export const schemas = {
+export const apiSchemas = {
   ...scalars,
   requests,
   responses,

@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { suite, test } from "node:test";
 import { expectTypeOf } from "expect-type";
-import { schemas } from "../../../src/index.js";
+import { apiSchemas } from "../../../src/index.js";
 import type { EnvironmentId } from "../../../src/scalars/environment-id.js";
 import type { Uuid } from "../../../src/scalars/uuid.js";
 import { type BrandOf, expectParseFails, expectParseSucceeds } from "../lib.js";
@@ -21,8 +21,8 @@ export function environmentIdTests() {
     });
 
     suite("schema", () => {
-      const expectFails = expectParseFails(schemas.environmentId());
-      const expectSucceeds = expectParseSucceeds(schemas.environmentId());
+      const expectFails = expectParseFails(apiSchemas.environmentId());
+      const expectSucceeds = expectParseSucceeds(apiSchemas.environmentId());
 
       test("should throw for undefined", () => {
         expectFails(undefined);
