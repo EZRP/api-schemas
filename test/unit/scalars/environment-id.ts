@@ -24,21 +24,11 @@ export function environmentIdTests() {
       const expectFails = expectParseFails(apiSchemas.environmentId());
       const expectSucceeds = expectParseSucceeds(apiSchemas.environmentId());
 
-      test("should throw for undefined", () => {
-        expectFails(undefined);
-      });
-
-      test("should throw for number", () => {
-        expectFails(42);
-      });
-
-      test("should throw for empty string", () => {
-        expectFails("");
-      });
-
-      test("should work for valid UUIDs", () => {
-        expectSucceeds(randomUUID());
-      });
+      test("should fail for undefined", () => expectFails(undefined));
+      test("should fail for number", () => expectFails(42));
+      test("should fail for empty string", () => expectFails(""));
+      test("should parse valid UUIDs", () =>
+        expectSucceeds(randomUUID() as EnvironmentId));
     });
   });
 }
