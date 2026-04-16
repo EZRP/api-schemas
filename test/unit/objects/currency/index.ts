@@ -3,11 +3,7 @@ import { suite, test } from "node:test";
 import { expectTypeOf } from "expect-type";
 import {
   CURRENCIES,
-  cadCurrency,
   currency,
-  euroCurrency,
-  gbpCurrency,
-  usdCurrency,
 } from "../../../../src/objects/currency/index.js";
 import type {
   CadCurrency,
@@ -22,19 +18,19 @@ export function currencyObjectTests() {
   suite("currency", () => {
     suite("types", () => {
       test("UsdCurrency should be branded with USD", () => {
-        expectTypeOf<BrandOf<UsdCurrency>>().toEqualTypeOf<"USD">();
+        expectTypeOf<BrandOf<UsdCurrency>>().toEqualTypeOf<"USDCurrency">();
       });
 
       test("CadCurrency should be branded with CAD", () => {
-        expectTypeOf<BrandOf<CadCurrency>>().toEqualTypeOf<"CAD">();
+        expectTypeOf<BrandOf<CadCurrency>>().toEqualTypeOf<"CADCurrency">();
       });
 
       test("EuroCurrency should be branded with EUR", () => {
-        expectTypeOf<BrandOf<EuroCurrency>>().toEqualTypeOf<"EUR">();
+        expectTypeOf<BrandOf<EuroCurrency>>().toEqualTypeOf<"EURCurrency">();
       });
 
       test("GbpCurrency should be branded with GBP", () => {
-        expectTypeOf<BrandOf<GbpCurrency>>().toEqualTypeOf<"GBP">();
+        expectTypeOf<BrandOf<GbpCurrency>>().toEqualTypeOf<"GBPCurrency">();
       });
 
       test("Currency should be the union of all currency types", () => {
@@ -66,10 +62,44 @@ export function currencyObjectTests() {
       });
     });
 
-    suite("individual schemas", () => {
-      test("usdCurrency should parse a valid USD object", () => {
+    suite("currency() union schema", () => {
+      test("should throw for an invalid currency object", () => {
+        assert.throws(() =>
+          currency().parse({
+            name: "Canadian Dollarz",
+            code: "CAD",
+            symbol: "$",
+            digits: 2,
+          }),
+        );
+      });
+
+      test("should throw for an unknown currency", () => {
+        assert.throws(() =>
+          currency().parse({
+            name: "Yen",
+            code: "JPY",
+            symbol: "¥",
+            digits: 0,
+          }),
+        );
+      });
+
+      test("should throw for extra fields", () => {
+        assert.throws(() =>
+          currency().parse({
+            name: "US Dollar",
+            code: "USD",
+            symbol: "$",
+            digits: 2,
+            extra: true,
+          }),
+        );
+      });
+
+      test("should parse a valid USD object", () => {
         assert.doesNotThrow(() =>
-          usdCurrency().parse({
+          currency().parse({
             name: "US Dollar",
             code: "USD",
             symbol: "$",
@@ -78,9 +108,9 @@ export function currencyObjectTests() {
         );
       });
 
-      test("usdCurrency should reject a CAD object", () => {
-        assert.throws(() =>
-          usdCurrency().parse({
+      test("should parse a valid CAD object", () => {
+        assert.doesNotThrow(() =>
+          currency().parse({
             name: "Canadian Dollar",
             code: "CAD",
             symbol: "$",
@@ -89,20 +119,9 @@ export function currencyObjectTests() {
         );
       });
 
-      test("cadCurrency should parse a valid CAD object", () => {
+      test("should parse a valid EUR object", () => {
         assert.doesNotThrow(() =>
-          cadCurrency().parse({
-            name: "Canadian Dollar",
-            code: "CAD",
-            symbol: "$",
-            digits: 2,
-          }),
-        );
-      });
-
-      test("euroCurrency should parse a valid EUR object", () => {
-        assert.doesNotThrow(() =>
-          euroCurrency().parse({
+          currency().parse({
             name: "Euro",
             code: "EUR",
             symbol: "€",
@@ -111,56 +130,13 @@ export function currencyObjectTests() {
         );
       });
 
-      test("gbpCurrency should parse a valid GBP object", () => {
+      test("should parse a valid GBP object", () => {
         assert.doesNotThrow(() =>
-          gbpCurrency().parse({
+          currency().parse({
             name: "British Pound",
             code: "GBP",
             symbol: "£",
             digits: 2,
-          }),
-        );
-      });
-    });
-
-    suite("currency() union schema", () => {
-      const schema = currency();
-
-      test("should parse USD", () => {
-        assert.doesNotThrow(() =>
-          schema.parse({
-            name: "US Dollar",
-            code: "USD",
-            symbol: "$",
-            digits: 2,
-          }),
-        );
-      });
-
-      test("should parse EUR", () => {
-        assert.doesNotThrow(() =>
-          schema.parse({ name: "Euro", code: "EUR", symbol: "€", digits: 2 }),
-        );
-      });
-
-      test("should throw for an unknown currency", () => {
-        assert.throws(() =>
-          schema.parse({ name: "Yen", code: "JPY", symbol: "¥", digits: 0 }),
-        );
-      });
-
-      test("should throw for missing fields", () => {
-        assert.throws(() => schema.parse({ code: "USD" }));
-      });
-
-      test("should throw for extra fields", () => {
-        assert.throws(() =>
-          schema.parse({
-            name: "US Dollar",
-            code: "USD",
-            symbol: "$",
-            digits: 2,
-            extra: true,
           }),
         );
       });

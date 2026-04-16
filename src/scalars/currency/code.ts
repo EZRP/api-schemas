@@ -3,14 +3,10 @@ import { CURRENCIES, type Currency } from "../../objects/index.js";
 
 export type CurrencyCode = Currency["code"];
 
-const validCodes = new Set(CURRENCIES.map((c) => c.code as string));
+const validCodes = CURRENCIES.map((c) => c.code as string);
 
 const schema = z.custom<CurrencyCode>(
-  (v) =>
-    typeof v === "string" &&
-    validCodes.has(v) &&
-    v.length === 3 &&
-    v.toUpperCase() === v,
+  (v) => typeof v === "string" && validCodes.includes(v),
   "Invalid currency code",
 );
 

@@ -6,12 +6,7 @@ export type CurrencyDigits = Currency["digits"];
 const validDigits = new Set<number>(CURRENCIES.map((c) => c.digits as number));
 
 const schema = z.custom<CurrencyDigits>(
-  (v) =>
-    typeof v === "number" &&
-    validDigits.has(v) &&
-    Number.isInteger(v) &&
-    v > 0 &&
-    v < 6,
+  (v) => typeof v === "number" && validDigits.has(v),
   "Invalid currency digits",
 );
 

@@ -1,24 +1,24 @@
-import { makeCurrency } from "./make-currency.js";
+import { makeCurrencySchema } from "./make-currency.js";
 
-export const usdCurrency = makeCurrency({
+export const usdCurrency = makeCurrencySchema({
   name: "US Dollar",
   code: "USD",
   symbol: "$",
   digits: 2,
 });
-export const cadCurrency = makeCurrency({
+export const cadCurrency = makeCurrencySchema({
   name: "Canadian Dollar",
   code: "CAD",
   symbol: "$",
   digits: 2,
 });
-export const euroCurrency = makeCurrency({
+export const euroCurrency = makeCurrencySchema({
   name: "Euro",
   code: "EUR",
   symbol: "€",
   digits: 2,
 });
-export const gbpCurrency = makeCurrency({
+export const gbpCurrency = makeCurrencySchema({
   name: "British Pound",
   code: "GBP",
   symbol: "£",
